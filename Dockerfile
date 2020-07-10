@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y \
 	git
 	
 RUN apt-get install -y libsm6 libxrender1 libfontconfig1
-RUN python3 -m pip install -y opencv-contrib-python
+RUN python3 -m pip install opencv-contrib-python
 RUN pip install --upgrade -r requirements.txt
 
 COPY app app/
