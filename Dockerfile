@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y \
 	unzip \
 	git
 
-RUN apt-get install libglib2.0-0
+RUN apt-get install libglib2.0-0 -y
 RUN pip install --upgrade -r requirements.txt
 
 COPY app app/
