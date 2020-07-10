@@ -8,7 +8,7 @@ from starlette.applications import Starlette
 from starlette.middleware.cors import CORSMiddleware
 from starlette.responses import HTMLResponse, JSONResponse
 from starlette.staticfiles import StaticFiles
-import cv2
+from cv2 import *
 
 export_file_url = 'https://drive.google.com/uc?export=download&id=1phtDQt-cgbgdYJ9dQxZuAHPI4m4rT0Em'
 export_file_name = 'export.pkl'
