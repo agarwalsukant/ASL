@@ -6,7 +6,8 @@ RUN apt-get update && apt-get install -y git python3-dev gcc \
 COPY requirements.txt .
 
 RUN pip install --upgrade -r requirements.txt
-RUN apt-get install libgtk2.0-dev -y
+RUN apt-get install aptitude
+RUN aptitude install libgtk2.0-dev
 
 COPY app app/
 
