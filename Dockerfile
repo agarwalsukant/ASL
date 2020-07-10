@@ -9,10 +9,9 @@ RUN apt-get update && apt-get install -y \
 	wget \
 	unzip \
 	git
-RUN pip install opencv-python
-RUN apt update && apt install -y libsm6 libxext6
-RUN apt-get install -y libxrender-dev
-
+	
+RUN apt-get install libsm6 libxrender1 libfontconfig1
+RUN python3 -m pip install opencv-contrib-python
 RUN pip install --upgrade -r requirements.txt
 
 COPY app app/
