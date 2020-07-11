@@ -1,0 +1,33 @@
+import pandas as pd
+import requests
+import glob
+from io import BytesIO
+import numpy as np
+import os
+import shutil
+import pprint
+import json
+from fastai import *
+from fastai.vision import *
+import pathlib
+
+path=pathlib.PosixPath('/kaggle/input/asl-alphabet/asl_alphabet_train/')
+
+data = ImageDataBunch.from_folder(path,
+        ds_tfms=get_transforms(), size=224) #consist of two transforms by default do_flip and flip_vert
+
+learn = create_cnn(data, models.resnet34, metrics=error_rate)
+
+learn.model_dir='/kaggle/working/'
+
+learn.lr_find()
+
+learn.recorder.plot()
+
+learn.fit_one_cycle(8)
+
+final_model_directory = os.getcwd()+ "/../models"
+
+final_model_name='model.pkl'
+
+learn.export(final_model_directory+f"/{final_model_name}")
