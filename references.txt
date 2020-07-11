@@ -2,3 +2,5 @@ https://www.starlette.io/
 https://fastapi.tiangolo.com/tutorial/cors/
 https://docs.python.org/3/library/asyncio.html#:~:text=asyncio%20is%20a%20library%20to,%2C%20distributed%20task%20queues%2C%20etc.
 https://docs.aiohttp.org/en/stable/client_quickstart.html
+http://docs.fast.ai/
+https://www.kaggle.com/pytorch/resnet34
