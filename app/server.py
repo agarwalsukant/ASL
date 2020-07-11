@@ -14,11 +14,11 @@ export_file_url = 'https://drive.google.com/uc?export=download&id=1phtDQt-cgbgdY
 export_file_name = 'export.pkl'
 
 classes = ['A','B','C', 'D', 'E', 'F', 'G',  'I',  'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'del', 'nothing', 'space']
-path = Path(__file__).parent
+path = Path(__file__).parent  #get parent directory path 
 
-app = Starlette()
-app.add_middleware(CORSMiddleware, allow_origins=['*'], allow_headers=['X-Requested-With', 'Content-Type'])
-app.mount('/static', StaticFiles(directory='app/static'))
+app = Starlette() #initialize Starlette application 
+app.add_middleware(CORSMiddleware, allow_origins=['*'], allow_headers=['X-Requested-With', 'Content-Type']) # Cross origin resource sharing, * means Wildcard i.e all are allowed 
+app.mount('/static', StaticFiles(directory='app/static'))  #Describes the directory for static files example css, js files
 
 
 async def download_file(url, dest):
@@ -38,7 +38,7 @@ async def setup_learner():
     except RuntimeError as e:
         if len(e.args) > 0 and 'CPU-only machine' in e.args[0]:
             print(e)
-            message = "\n\nThis model was trained with an old version of fastai and will not work in a CPU environment.\n\nPlease update the fastai library in your training environment and export your model again.\n\nSee instructions for 'Returning to work' at https://course.fast.ai."
+            message = "\n\nThis model was trained with an old version of fastai and will not work in a CPU environment."
             raise RuntimeError(message)
         else:
             raise
@@ -61,12 +61,13 @@ async def analyze(request):
     img_data = await request.form()
     img_bytes = await (img_data['file'].read())
     img = open_image(BytesIO(img_bytes))
-    input_img = cv2.flip(img,1)
-    gray_img = cv2.cvtColor(input_img,cv2.COLOR_BGR2GRAY)
-    blur_img = cv2.GaussianBlur(gray_img,(7,7),0)
-    equalized_img = cv2.equalizeHist(blur_img)
-    resized_img=cv2.resize(equalized_img,(200,200))
-    prediction = learn.predict(resized_img)[0]
+    #print(img.size())
+    #input_img = cv2.flip(img,1)
+    #gray_img = cv2.cvtColor(input_img,cv2.COLOR_BGR2GRAY)
+    #blur_img = cv2.GaussianBlur(gray_img,(7,7),0)
+    #equalized_img = cv2.equalizeHist(blur_img)
+    #resized_img=cv2.resize(equalized_img,(200,200))
+    prediction = learn.predict(img)[0]
     return JSONResponse({'result': str(prediction)})
 
 
