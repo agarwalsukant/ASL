@@ -60,7 +60,7 @@ async def homepage(request):
 async def analyze(request):
     img_data = await request.form()
     img_bytes = await (img_data['file'].read())
-    input_img = cv2.flip(input_frame,1)
+    input_img = cv2.flip(img_bytes,1)
     gray_img = cv2.cvtColor(input_img,cv2.COLOR_BGR2GRAY)
     blur_img = cv2.GaussianBlur(gray_img,(7,7),0)
     equalized_img = cv2.equalizeHist(blur_img)
