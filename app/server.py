@@ -60,6 +60,8 @@ async def homepage(request):
 async def analyze(request):
     img_data = await request.form()
     img_bytes = await (img_data['file'].read())
+    img_stream = BytesIO(img_bytes)
+    img2 = cv2.imdecode(np.fromstring(img_stream.read(), np.uint8), 1)
     img = open_image(BytesIO(img_bytes))
     #print(img.size())
     #input_img = cv2.flip(img,1)
