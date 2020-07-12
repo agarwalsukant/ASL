@@ -65,7 +65,7 @@ async def analyze(request):
     blur_img = cv2.GaussianBlur(gray_img,(7,7),0)
     equalized_img = cv2.equalizeHist(blur_img)
     resized_img = cv2.resize(equalized_img,(200,200))
-    img = open_image(BytesIO(img_bytes))    
+    img = open_image(BytesIO(resized_img))    
     #print(img.size())
     #input_img = cv2.flip(img,1)
     #gray_img = cv2.cvtColor(input_img,cv2.COLOR_BGR2GRAY)
